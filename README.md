@@ -1,18 +1,25 @@
 # SeamlessVoronoi
-Seamless voronoi custom node for the Unity's shader graph.
+Seamless voronoi Subgraphs for ShaderGraph (Unity 2021.3).
 
+Forked from: https://github.com/Xentiie/SeamlessVoronoi
 Made with this tutorial: https://www.ronja-tutorials.com/2018/10/06/tiling-noise.html
 
-# How to use the node: 
-Inputs:
-"UV": UV coordinates.
-"Height": The variation of the cells.
-"CellDensity": Density of the cells.
+## Subgraph: SeamlessVoronoi
+Based on the original algorithm, created as a subgraph because the custom node syntax was outdated.
+All needed scripts were moved to an HLSL file.
+
+"UV": Texture UV coordinates.
+"Offset": Variation offset for the cells. For example, multiply by a time node to animate it.
+"Density": Density of the cells.
 "Period": How often the voronoi noise will tile.
 
-Outputs:
-Voronoi: ![Basic voronoi](https://github.com/Xentiie/SeamlessVoronoi/blob/master/Screenshots/VoronoiExemple1.PNG)
+## Subgraph: PolarizeVoronoi
+Warped voronoi noise to create a seamless circular pattern.
+Useful for Dissolve Masking.
 
-Cells: ![Cells](https://github.com/Xentiie/SeamlessVoronoi/blob/master/Screenshots/VoronoiExemple2.PNG)
-
-Cell border: ![Borders](https://github.com/Xentiie/SeamlessVoronoi/tree/master/Screenshots/VoronoiExemple3.PNG)
+"UV": Rectangular texture UV coordinates. Will get polarized internally.
+"RadialScale": Radial Scale of the polar coordinates.
+"Density": Density of the cells. Only some values will produce a seamless texture. Use 1, 2, 4, 5, 8, 9, or 10.
+"Period": How often the voronoi noise will tile.
+"Speed": Animation speed of the cells. Multiplied with the internal Time node.
+"Power": Intensity of the voronoi noise. 0 = Full opacity. 0 > Increases dissolve.
